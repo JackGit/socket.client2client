@@ -1,0 +1,27 @@
+{
+  "name": "socket.client2client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackgit/socket.client2client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackgit/socket.client2client/issues"
+  },
+  "homepage": "https://github.com/jackgit/socket.client2client#readme",
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "express": "^4.16.2",
+    "koa": "^2.4.1"
+  }
+}
