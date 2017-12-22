@@ -42,3 +42,18 @@ to solve a problem, say we have terminals and controls:
 4. there is a centralized controller, should able to know all controls and all ternimal connections
 
  */
+
+/*
+A control / terminal connected, how to identify its role?
+  1. send role information while doing connection?
+  2. after connected, send role information?
+  3. connect a role-specified namespace?
+    3.1 is able send message cross namespaces?
+ */
+
+
+/*
+  About design,
+  1. try to think about SAO message queue: request queue and response queue
+  2. how about design socket event name like RESTful API
+ */
