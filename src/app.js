@@ -14,10 +14,33 @@ io.on('connection', (socket) => {
   })
 
   socket.on('message', (p1) => {
-    console.log(`socket.id ${socket.id} message`, p1)
-    if (p1.clientId) {
-      socket.to(p1.clientId).send(p1.payload)
-    }
+    socket.emit('message', p1, function () {
+      console.log('message ack callback')
+    })
+  })
+
+  socket.on('/client/login', (message, callback) => {
+    socket.broadcast.emit('/client/login', {
+      clientId: socket.id
+    })
+    callback()
+  })
+
+  socket.on('/client/logout', () => {
+    socket.broadcast.emit('/client/logout', {
+      clientId: socket.id
+    })
+  })
+
+  socket.on('/client/to', (message, callback) => {
+    socket.to(message.clientId).emit('/client/to', message)
+    setTimeout(function () {
+      callback({ txt: 'this is ack' })
+    }, 5000)
+  })
+
+  socket.on('/client/broadcast', message => {
+    socket.broadcast.emit('/client/broadcast', message)
   })
 })
 

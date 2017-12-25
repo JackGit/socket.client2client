@@ -17,11 +17,54 @@
     console.log('socket.id', socket.id)
   })
 
-  socket.on('message', (p1) => {
+  socket.on('message', (p1, callback) => {
     console.log('message =>', p1)
+    callback()
   })
 
   console.log('socket.id', socket.id)
+
+  socket.on('/client/login', function (data) {
+    console.log('/client/login', data)
+  })
+
+  socket.on('/client/logout', function (data) {
+    console.log('/client/logout', data)
+  })
+
+  socket.on('/client/broadcast', function (data) {
+    console.log('/client/broadcast', data)
+  })
+
+  socket.on('/client/to', function (data, callback) {
+    console.log('/client/to', data)
+    callback()
+  })
+
+  function login () {
+    socket.emit('/client/login', null, function () {
+      console.log('login successfully')
+    })
+  }
+
+  function logout () {
+    socket.emit('/client/logout')
+  }
+
+  function to (clientId, data) {
+    socket.emit('/client/to', {
+      clientId: clientId,
+      payload: data
+    }, function () {
+      console.log('/client/to ack', arguments)
+    })
+  }
+
+  function broadcast (data) {
+    socket.emit('/client/broadcast', {
+      payload: data
+    })
+  }
   </script>
 </body>
 </html>
