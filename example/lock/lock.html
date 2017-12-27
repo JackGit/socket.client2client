@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h4>I am a lock</h4>
+  <p id="status">unknown</p>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+  var socket = io()
+
+  socket.on('connect', () => {
+    // 链接后立刻向后台注册 这样服务器才能通知其他 controller 有 lock 登入
+    socket.emit('/lock/login', { id: 'LOCK_' + Date.now() })
+
+    // 监听 上锁 事件
+    socket.on('/lock/lock', function (data) {
+      lock()
+    })
+
+    // 监听 开锁 事件
+    socket.on('/lock/unlock', function (data) {
+      unlock()
+    })
+  })
+
+  function lock () {
+    document.getElementById('status').innerText = 'locked'
+  }
+
+  function unlock () {
+    document.getElementById('status').innerText = 'unlocked'
+  }
+  </script>
+</body>
+</html>
